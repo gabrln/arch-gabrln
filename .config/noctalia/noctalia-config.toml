@@ -1,0 +1,209 @@
+[bar.default]
+capsule = true
+center = [ "wallhaven", "clock", "clipboard" ]
+end = [
+    "ram",
+    "tray",
+    "notifications",
+    "network",
+    "bluetooth",
+    "input_volume",
+    "volume",
+    "brightness",
+    "battery",
+    "control-center",
+    "session"
+]
+start = [ "launcher", "wallpaper", "workspaces", "media" ]
+
+[brightness]
+enable_ddcutil = true
+minimum_brightness = 0.0099999997764825821
+
+[dock]
+enabled = true
+icon_size = 36
+pinned = [ "firefox" ]
+
+[hot_corners]
+enabled = true
+
+    [hot_corners.bottom_right]
+    action = "launcher"
+
+    [hot_corners.top_right]
+    action = "control_center"
+
+[location]
+auto_locate = true
+
+[lockscreen]
+monitors = [ "HDMI-A-1" ]
+
+[lockscreen_widgets]
+enabled = true
+schema_version = 2
+widget_order = [
+    "lockscreen-login-box@HDMI-A-1",
+    "lockscreen-login-box@eDP-1",
+    "lockscreen-widget-0000000000000001",
+    "lockscreen-widget-0000000000000002",
+    "lockscreen-widget-0000000000000003"
+]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 898.0
+    output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 898.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+    box_height = 192.0
+    box_width = 512.0
+    cx = 960.0
+    cy = 252.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
+        clock_style = "digital"
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000002]
+    box_height = 128.0
+    box_width = 384.0
+    cx = 960.0
+    cy = 668.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "media_player"
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000003]
+    box_height = 448.0
+    box_width = 464.0
+    cx = 290.0
+    cy = 764.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "fancy_audio_visualizer"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000003.settings]
+        background = false
+
+[plugin_settings."noctalia/wallhaven"]
+download_dir = "/home/gabrln/Pictures/Wallhaven"
+
+[plugins]
+enabled = [ "noctalia/wallhaven" ]
+
+[shell]
+avatar_path = "/home/gabrln/Pictures/Wallhaven/wallhaven-gwd837.png"
+external_ip_enabled = true
+lang = "pt-BR"
+polkit_agent = true
+screen_time_enabled = true
+telemetry_enabled = true
+
+    [shell.launcher]
+    categories = false
+    compact = true
+
+    [shell.screen_corners]
+    enabled = true
+
+    [shell.screenshot]
+    confirm_region = true
+
+[theme]
+builtin = "Catppuccin"
+community_palette = "Solarized"
+
+    [theme.templates]
+    builtin_ids = [ "btop", "gtk3", "gtk4", "kcolorscheme", "kitty", "qt", "umbriel" ]
+    community_ids = [ "yazi" ]
+
+[wallpaper.default]
+path = "/home/gabrln/Pictures/Wallhaven/wallhaven-w5x65p.jpg"
+
+[wallpaper.last]
+path = "/home/gabrln/Pictures/Wallhaven/wallhaven-w5x65p.jpg"
+
+[wallpaper.monitors.HDMI-A-1]
+path = "/home/gabrln/Pictures/Wallhaven/wallhaven-w5x65p.jpg"
+
+[wallpaper.monitors.eDP-1]
+path = "/home/gabrln/Pictures/Wallhaven/wallhaven-w5x65p.jpg"
+
+[widget.launcher]
+enabled = false
+
+[widget.network]
+show_label = false
+
+[widget.tray]
+drawer = true
+
+[widget.wallhaven]
+type = "noctalia/wallhaven:wallhaven"
+
+[widget.wallpaper]
+enabled = false
