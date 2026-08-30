@@ -1,67 +1,145 @@
 {
-    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
- "logo": {
-  "source": "~/.config/fastfetch/logos/arch.png",
-  "type": "kitty-direct",
-  "height": 10,
-  "width": 20,
-  "padding": {
-    "top": 1
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+
+  "logo": {
+    "source": "~/.config/fastfetch/logos/cards.png",
+    "type": "kitty-direct",
+    "height": 14,
+    "width": 32,
+    "padding": {
+      "top": 1,
+      "right": 2
     }
   },
-    "display": {
-        "separator": " -> "
+
+  "display": {
+    "separator": " -> "
+  },
+
+  "modules": [
+    "break",
+
+    {
+      "type": "title",
+      "keyWidth": 10,
+      "format": "         {6}{7}{8}"
     },
-    "modules": [
-        "break",
-        {
-            "type": "title",
-            "keyWidth": 10,
-			"format": "         {6}{7}{8}"
-        },
-        {
-            "type": "custom",
-            "format": " ─────────────────────────── "
-        },
-        {
-            "type": "kernel",
-            "key": " ",
-            "keyColor": "yellow"
-        },
-        {
-            "type": "wm",
-            "key": " ",
-            "keyColor": "blue"
-        },
-        {
-            "type": "shell",
-            "key": " ",
-            "keyColor": "yellow"
-        },
-        {
-            "type": "terminal",
-            "key": " ",
-            "keyColor": "blue"
-        },
-        {
-            "type": "memory",
-            "key": "󰍛 ",
-            "keyColor": "magenta",
-            "format": "{1} / {2}"
-        },
-        {
-            "type": "uptime",
-            "key": "󰔛 ",
-            "keyColor": "green"
-        },
-        {
-            "type": "custom",
-            "format": " ─────────────────────────── "
-        },
-        {
-            "type": "custom",
-            "format": "   \u001b[31m  \u001b[32m  \u001b[33m  \u001b[34m  \u001b[35m  \u001b[36m  \u001b[37m  \u001b[90m "
-        },
-		"break",
-    ]
+
+    {
+      "type": "custom",
+      "format": " ─────────────────────────── "
+    },
+
+    {
+      "type": "os",
+      "key": "󰣇 ",
+      "keyColor": "cyan"
+    },
+
+    {
+      "type": "host",
+      "key": "󰌢 ",
+      "keyColor": "blue"
+    },
+
+    {
+      "type": "kernel",
+      "key": " ",
+      "keyColor": "yellow"
+    },
+
+    {
+      "type": "cpu",
+      "key": "󰻠 ",
+      "keyColor": "red"
+    },
+
+    {
+      "type": "gpu",
+      "key": "󰢮 ",
+      "keyColor": "magenta"
+    },
+
+    {
+      "type": "wm",
+      "key": " ",
+      "keyColor": "blue"
+    },
+
+    {
+      "type": "shell",
+      "key": " ",
+      "keyColor": "yellow"
+    },
+
+    {
+      "type": "terminal",
+      "key": " ",
+      "keyColor": "blue"
+    },
+
+    {
+      "type": "command",
+      "key": "󰏖 ",
+      "keyColor": "yellow",
+      "text": "printf '%s' \"$(pacman -Qq 2>/dev/null | wc -l) | AUR: $(yay -Qm 2>/dev/null | wc -l) | Flatpak: $(flatpak list --app 2>/dev/null | wc -l)\"",
+      "format": "Packages -> {result}"
+    },
+
+    {
+      "type": "display",
+      "key": "󰍹 ",
+      "keyColor": "cyan"
+    },
+
+    {
+      "type": "command",
+      "key": "󰍛 ",
+      "keyColor": "magenta",
+      "text": "awk '/MemTotal/ {printf \"%.0f GB\", $2 / 1000000}' /proc/meminfo",
+      "format": "Memory -> {result}"
+    },
+
+    {
+      "type": "command",
+      "key": " ",
+      "keyColor": "magenta",
+      "text": "lsblk -bndo SIZE /dev/nvme0n1 | awk '{if ($1 >= 1000000000000) printf \"%.2f TB\", $1 / 1000000000000; else printf \"%.0f GB\", $1 / 1000000000}'",
+      "format": "Disk -> {result}"
+    },
+
+    {
+      "type": "command",
+      "key": "󰇖 ",
+      "keyColor": "blue",
+      "text": "nmcli -g IP4.DNS device show | sed '/^$/d' | sed 's/#.*//' | grep -v '^192\\.168\\.' | paste -sd ', ' -",
+      "format": "DNS -> {result}"
+    },
+     
+    {
+      "type": "uptime",
+      "key": "󰔛 ",
+      "keyColor": "green"
+    },
+
+    {
+      "type": "command",
+      "key": " ",
+      "keyColor": "green",
+      "text": "birth_install=$(stat -c %W /); current=$(date +%s); days=$(( (current - birth_install) / 86400 )); echo \"$days days\"",
+      "format": "OS Age -> {result}"
+    },
+
+    {
+      "type": "custom",
+      "format": " ─────────────────────────── "
+    },
+
+    {
+      "type": "custom",
+      "format": "   \u001b[31m  \u001b[32m  \u001b[33m  \u001b[34m  \u001b[35m  \u001b[36m  \u001b[37m  \u001b[90m "
+    },
+
+    "break"
+  ]
 }
