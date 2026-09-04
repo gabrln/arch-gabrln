@@ -48,7 +48,6 @@ enabled = true
 softness = 10
 offset_x = 2
 offset_y = 2
-color = "#0000007F"
 
 # Overview -------------------------------------------------------------------
 
