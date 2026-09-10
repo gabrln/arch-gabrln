@@ -20,10 +20,10 @@
 # ────────────────────────────────────────────────────────────────────────────
 
 [include]
-files = []                                      # Example: ["appearance.toml", "outputs.toml"]
+files = ["noctalia.toml"]                                      # Example: ["appearance.toml", "outputs.toml", "noctalia.toml"]
 
 [include.optional]
-files = ["~/.config/umbriel/noctalia.toml"]                                      # Example: ["~/.config/umbriel/noctalia.toml"]
+files = []                                      # Example: ["~/.config/umbriel/noctalia.toml"]
 
 # ─────────────────────────────── General ────────────────────────────────────
 # Configure startup commands, session behavior, environment variables, and
@@ -90,7 +90,7 @@ position = [1920, 0]
 scale = 1.0
 tearing = true
 vrr = "fullscreen"
-workspaces = 10
+workspaces = 5
 
 [output."eDP-1"]
 mode = "1920x1080@60"
@@ -98,7 +98,7 @@ position = [0, 0]
 scale = 1.0
 tearing = true
 vrr = "fullscreen"
-workspaces = 10
+workspaces = 5
 
 # Replace the count with ["WEB", "CHAT", "MEDIA"] for named static workspaces,
 # or with "dynamic" to state the dynamic default explicitly.
@@ -344,19 +344,11 @@ follows_mouse = true                           # Focus the pointer target after 
 "Mod+3" = "workspace-switch:3"
 "Mod+4" = "workspace-switch:4"
 "Mod+5" = "workspace-switch:5"
-"Mod+6" = "workspace-switch:6"
-"Mod+7" = "workspace-switch:7"
-"Mod+8" = "workspace-switch:8"
-"Mod+9" = "workspace-switch:9"
 "Mod+Shift+1" = "window-move-to-workspace:1"
 "Mod+Shift+2" = "window-move-to-workspace:2"
 "Mod+Shift+3" = "window-move-to-workspace:3"
 "Mod+Shift+4" = "window-move-to-workspace:4"
 "Mod+Shift+5" = "window-move-to-workspace:5"
-"Mod+Shift+6" = "window-move-to-workspace:6"
-"Mod+Shift+7" = "window-move-to-workspace:7"
-"Mod+Shift+8" = "window-move-to-workspace:8"
-"Mod+Shift+9" = "window-move-to-workspace:9"
 # Quote an all-digit name to distinguish it from a position.
 # "Mod+Ctrl+2" = 'workspace-switch:"2"/DP-2'
 
