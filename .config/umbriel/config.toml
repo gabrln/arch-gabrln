@@ -20,7 +20,10 @@
 # ────────────────────────────────────────────────────────────────────────────
 
 [include]
-files = ["noctalia.toml"]                                      # Example: ["outputs.toml", "noctalia.toml"]
+files = []                                      # Example: ["appearance.toml", "outputs.toml"]
+
+[include.optional]
+files = ["~/.config/umbriel/noctalia.toml"]                                      # Example: ["~/.config/umbriel/noctalia.toml"]
 
 # ─────────────────────────────── General ────────────────────────────────────
 # Configure startup commands, session behavior, environment variables, and
@@ -286,37 +289,34 @@ follows_mouse = true                           # Focus the pointer target after 
 
 [keybinds]
 
+# Applications and session
 "Mod+Return" = "spawn:kitty"
-"Mod+B" = "spawn:firefox"
-"Mod+T" = "window-toggle-floating"
-"Mod+Shift+T" = "window-focus-switch-floating"
-"Mod+Slash" = "cheatsheet-toggle"
-"Mod+V" = "spawn:noctalia msg panel-toggle clipboard"
-"Mod+P" = "spawn:noctalia msg screenshot-region"
-"Mod+Shift+P" = "spawn:noctalia msg screenshot-fullscreen"
-"Mod+Q" = "window-close"
 "Mod+D" = "spawn:noctalia msg panel-toggle launcher"
+"Mod+Q" = "window-close"
+"Mod+B" = "spawn:firefox"
+"Mod+V" = "spawn:noctalia msg panel-toggle clipboard"
+"Mod+Print" = "spawn:noctalia msg screenshot-region"
+"Mod+Shift+Print" = "spawn:noctalia msg screenshot-fullscreen"
 "Mod+W" = "spawn:noctalia msg panel-toggle wallpaper"
 "Mod+N" = "spawn:noctalia msg panel-toggle noctalia/notes:panel"
+# Focus navigation. In overview, Mod+Up/Down retain normal layout focus, so they
+# traverse stacks in the default horizontal layout. Bare Up/Down move between
+# workspace rows.
+"Mod+Left" = "window-focus-left"
+"Mod+Down" = "window-focus-down"
+"Mod+Up" = "window-focus-up"
+"Mod+Right" = "window-focus-right"
 
-"Mod+1" = "workspace-switch:1"
-"Mod+2" = "workspace-switch:2"
-"Mod+3" = "workspace-switch:3"
-"Mod+4" = "workspace-switch:4"
-"Mod+5" = "workspace-switch:5"
-"Mod+6" = "workspace-switch:6"
-"Mod+7" = "workspace-switch:7"
-"Mod+8" = "workspace-switch:8"
-"Mod+9" = "workspace-switch:9"
-"Mod+0" = "workspace-switch:10"
+# Window state and layout
+"Mod+T" = "window-toggle-floating"
+"Mod+Shift+T" = "window-focus-switch-floating"
+"Mod+P" = "window-toggle-pinned"
+"Mod+M" = "window-toggle-maximize-to-edges"
 
 # Overview
 "Mod+O" = { action = "overview-toggle", repeat = false }
 
-# These useful bindings are built in already. They stay commented here so an
-# included keybind file can override them without this main file winning again.
-# Uncomment a chord only when this file should own that override.
-
+# Common keybinds
 "Mod+Escape" = "session-quit"
 "Mod+F1" = "window-focus-next"
 "Mod+H" = "window-focus-left"
@@ -327,7 +327,7 @@ follows_mouse = true                           # Focus the pointer target after 
 "Mod+Shift+Down" = "window-move-down"
 "Mod+Shift+Up" = "window-move-up"
 "Mod+Shift+Right" = "column-move-right"
-"Mod+F" = "window-toggle-fullscreen"
+"Mod+F" = "window-toggle-fullscreen"             # Exit restores the previous layout size immediately
 "Mod+Ctrl+F" = "window-toggle-maximize"
 "Mod+R" = "window-cycle-width"
 "Mod+Shift+R" = "window-cycle-width-back"
@@ -335,24 +335,59 @@ follows_mouse = true                           # Focus the pointer target after 
 "Mod+Period" = "window-consume-right"
 "Mod+WheelUp" = "window-focus-left"
 "Mod+WheelDown" = "window-focus-right"
-# Mod+1 through Mod+9 switch workspaces. Adding Shift moves the focused window;
-# keypad digits provide the same built-in actions.
+
+# Workspaces. Bare digits are positions on the output under the pointer.
+"Mod+1" = "workspace-switch:1"
+"Mod+2" = "workspace-switch:2"
+"Mod+3" = "workspace-switch:3"
+"Mod+4" = "workspace-switch:4"
+"Mod+5" = "workspace-switch:5"
+"Mod+6" = "workspace-switch:6"
+"Mod+7" = "workspace-switch:7"
+"Mod+8" = "workspace-switch:8"
+"Mod+9" = "workspace-switch:9"
+"Mod+Shift+1" = "window-move-to-workspace:1"
+"Mod+Shift+2" = "window-move-to-workspace:2"
+"Mod+Shift+3" = "window-move-to-workspace:3"
+"Mod+Shift+4" = "window-move-to-workspace:4"
+"Mod+Shift+5" = "window-move-to-workspace:5"
+"Mod+Shift+6" = "window-move-to-workspace:6"
+"Mod+Shift+7" = "window-move-to-workspace:7"
+"Mod+Shift+8" = "window-move-to-workspace:8"
+"Mod+Shift+9" = "window-move-to-workspace:9"
+# Quote an all-digit name to distinguish it from a position.
+# "Mod+Ctrl+2" = 'workspace-switch:"2"/DP-2'
 
 # Scratchpads
-# Each output owns a separate scratchpad. Bare actions target the output under
-# the pointer; append `:DP-1` or a monitor Config name to target one explicitly.
+# These bare actions use the implicit `default` scratchpad because no named
+# definitions are active above. A scratchpad is global: toggling it summons all
+# its windows to the output under the pointer. Only outputs with a visible
+# scratchpad receive its dim and blur backdrop.
+# Resize, maximize, fullscreen, and close actions target a scratchpad that owns
+# keyboard focus. Layout-relative window actions leave the workspace behind it
+# unchanged.
 # Documentation: https://docs.noctalia.dev/umbriel/scratchpads/
 "Mod+Shift+Space" = "window-move-to-scratchpad"
 "Mod+Space" = "scratchpad-toggle"
 "Mod+Ctrl+Space" = "window-restore-from-scratchpad"
 "Mod+Tab" = "scratchpad-focus-next"
 
+# Named mode recipe: uncomment the definitions above, then replace the four
+# action values with named forms such as these. Every scratchpad action needs a
+# configured name once named mode is active.
+# "Mod+Shift+Space" = "window-move-to-scratchpad:terminal"
+# "Mod+Space" = "scratchpad-toggle:terminal"
+# "Mod+Ctrl+Space" = "window-restore-from-scratchpad:terminal"
+# "Mod+Tab" = "scratchpad-focus-next:terminal"
+# "Mod+Ctrl+Shift+M" = "window-toggle-scratchpad:music"
+# "Mod+Ctrl+M" = "scratchpad-toggle:music"
+
 # Optional navigation and sizing recipes. These chords do not replace active
 # bindings above when uncommented.
 # "Mod+Page_Up" = "workspace-previous"
 # "Mod+Page_Down" = "workspace-next"
-"Mod+Shift+Page_Up" = "window-move-to-workspace-previous"
-"Mod+Shift+Page_Down" = "window-move-to-workspace-next"
+# "Mod+Shift+Page_Up" = "window-move-to-workspace-previous"
+# "Mod+Shift+Page_Down" = "window-move-to-workspace-next"
 # "Mod+Home" = "column-focus-first"
 # "Mod+End" = "column-focus-last"
 # "Mod+Shift+Home" = "column-move-to-first"
@@ -374,6 +409,8 @@ follows_mouse = true                           # Focus the pointer target after 
 # "Mod+Ctrl+T" = "workspace-set-layout:toggle"
 # "Mod+MouseMiddle" = "layout-scroll-drag"
 # "Mod+Alt+K" = "keyboard-layout-next"
+# "Mod+WheelUp" = { action = "workspace-previous", cooldown_ms = 150 }
+# "Mod+WheelDown" = { action = "workspace-next", cooldown_ms = 150 }
 
 # Submaps temporarily replace the active keybind layer and can nest. Entry
 # binds must not repeat. A table-form bind can run an action and then reset one
@@ -423,8 +460,7 @@ bottom = 0
 # direction = "horizontal"                      # horizontal or vertical strip axis
 default_width_fraction = 0.5                    # Initial width for new columns, 0.1-1.0
 center_underfull_strip = true                   # Center a strip narrower than the viewport
-center_focused = false                          # Always center the focused column
-expand_single_column = true                     # Let a lone column fill the viewport
+center_focused = "never"                          # Always center the focused column                    # Let a lone column fill the viewport
 
 [layout.dwindle]
 # preserve_split = false                        # Keep every split direction fixed after creation
@@ -657,12 +693,13 @@ curve = "easeout"
 # ────────────────────────────────────────────────────────────────────────────
 
 [overview]
-zoom = 0.5                                      # Workspace scale in overview, 0.1-0.75
-# Pinned windows stay hidden until overview closes; visible scratchpads are dismissed.
-# background_blur = true                        # Blur the wallpaper behind overview rows
-# workspace_wallpaper = true                    # Mirror wallpapers inside workspace previews
-# shortcuts = true                              # Show keyboard shortcut badges on windows
-# shortcut_keys = "1234567890"                  # Badge keys in preference order
+zoom = 0.5                     # 0.1-0.75
+scroll_factor_horizontal = 1.0 # 0.1-10.0
+scroll_factor_vertical = 1.0   # 0.1-10.0
+background_blur = true
+workspace_wallpaper = true
+shortcuts = true
+shortcut_keys = "1234567890"                 # Badge keys in preference order
 
 [hot_corners.top_left]
 enabled = true                                  # Open the overview after resting here
